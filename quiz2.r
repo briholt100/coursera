@@ -21,15 +21,16 @@ what is the absolute difference between the average
 horsepower of 4-cylinder cars and the average horsepower of 8-cylinder cars?
 mean.hp.by.cyl<-tapply(mtcars$hp,mtcars$cyl,mean)
 
-mean.hp.by.cyl[2]
+abs(mean.hp.by.cyl[1]-mean.hp.by.cyl[3])
 
-
+debug(ls)
+ls()
 
 x <- 1:10
-for( i in 1:length(x)) {if(x > 5) {
-  x[i] <- 0
-}
-}
+
+func.y<-function (){if(x > 5) {
+  x <- 0
+}}
 
 f <- function(x) {
   g <- function(y) {
@@ -37,4 +38,9 @@ f <- function(x) {
   }
   z <- 4
   x + g(x)
+}
+
+
+pow <- function(x = 4, n = 3) {
+  x^n
 }
