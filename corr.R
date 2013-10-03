@@ -18,13 +18,14 @@ corr <- function(directory="specdata", threshold = 0) {
     good<-complete.cases(output)
     row.count<-nrow(output[good,])
     df<-data.frame(output[good,])
-    if (row.count >= threshold) {cor.vec<-append(cor.vec,cor(x=df[,2],y=df[,3]))}
+    
+    if (row.count > threshold) {cor.vec<-append(cor.vec,cor(x=df[,2],y=df[,3]))}
     
     }
   return(cor.vec)
 }
    
-cr<-corr("specdata")  
+cr<-corr("specdata",0)  
 head(cr)
 summary(cr)
 length(cr)

@@ -22,7 +22,7 @@ complete <- function(directory="specdata", id ) {
   colnames(df)<-c("id","nobs")
   return(df)
 }
-complete(id=3)
+complete(id=289)
 #complete(id=1)
 #complete(id=c(2,4,8,10,12))
 #complete(id=c(30:25))
