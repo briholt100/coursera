@@ -25,3 +25,15 @@ abline(v=median(outcome[,23],na.rm=T),col="blue", lwd=3)
 #####NOte, he asks to add the mean to the title, as well as adding a smooth density estimate over the histogram
 
 #quest 3
+hos.count<-table(outcome$State)
+hos20<-subset(hos.count,hos.count>20)
+outcome2<-subset(outcome, outcome$State %in% names(hos20))
+
+death<-outcome2[,11]
+state<-outcome2$State
+par(mfrow=c(1,1))
+par(yaxt="n")
+boxplot (death~state, ylab="30-Day Death Rate",main="Heart Attack 30-day Death Rate by State"
+         , labels = F)
+
+dev.off()
