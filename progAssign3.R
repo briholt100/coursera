@@ -37,3 +37,5 @@ boxplot (death~state, ylab="30-Day Death Rate",main="Heart Attack 30-day Death R
          , labels = F)
 
 dev.off()
+box.df<-data.frame(outcomes[,c(13,14,19,20,25,26)])
+boxplot(box.df,na.rm=T)
