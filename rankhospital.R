@@ -1,6 +1,6 @@
 #####below to best.R
 
-best<-function(state,outcome){
+rankhospital<-function(state,outcome,num){
   #for home:
   #directoryBase <- "C:/Documents and Settings/brian/My Documents/My Data Sources/MOOC/coursera computing data science/ProgAssign2/"    
   #for campus:
@@ -14,7 +14,7 @@ best<-function(state,outcome){
   state.list<-levels(factor(outcomes$State))
   if (state %in% state.list & outcome %in% outcome.list){
     
-  ##Here I need to really make a dictionary, but maybe a d.f that includes the state's
+    ##Here I need to really make a dictionary, but maybe a d.f that includes the state's
     #lowest mortality rates, and it's hospitals
     #rank them, and return the best (lowest)
     state.df<-data.frame(outcomes[outcomes$State==state,c(7,11,17,23,2)])
@@ -26,24 +26,23 @@ best<-function(state,outcome){
     
     state.df<-state.df[order(state.df[,outcome],state.df[,"name"],na.last=T),]
     
-  ###at this point, must deal with ties, which still only 
+    ###at this point, must deal with ties, which still only 
     #leads to the printing of one hospital, but that one will be alphabetized
     #which basically means I need to ascend by first then 2nd column
     
     #for(st in 1:state)
     print(state.df[1,5])
-#for check    print(head(state.df)) 
-  
-  
+    #for check    print(head(state.df)) 
+    
+    
   }
   else {
     if(state %in% state.list==F){
       stop("invalid state")
     }
-        else{
-          stop("invalid outcome")
-        }
+    else{
+      stop("invalid outcome")
+    }
   }
 }
-#best("FL","heart failure")
-
+#rankhospital("MD","heart failure",5)
