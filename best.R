@@ -28,6 +28,7 @@ best<-function(state,outcome){
     
   ###at this point, must deal with ties, which still only 
     #leads to the printing of one hospital, but that one will be alphabetized
+    #which basically means I need to ascend by first then 2nd column
     
     #for(st in 1:state)
     print(state.df[1,5])
