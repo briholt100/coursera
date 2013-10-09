@@ -24,17 +24,27 @@ rankhospital<-function(state,outcome,num=1){
     state.df<-state.df[order(state.df[,outcome],state.df[,"name"],na.last=T),]
     state.df[,6]<-1:nrow(state.df)
   
+        
     
-    if(num=="best"){num<-1}
-    if(num=="worst"){ worst.index<-which(state.df[,outcome]>=max(state.df[,outcome],na.rm=T))
-                      state.df<-state.df[worst.index,]
-                      print(state.df[,5])
-    }    
-    
-    if (is.integer(num)|is.numeric(num)){print(state.df[num,5])
-                                         #for check    print(head(state.df,num+5))
+    if (is.integer(num)|is.numeric(num)){
+      if(num > nrow(state.df)){print(NA)}
+      else{
+      print(state.df[num,5])
+      }
+      #for check    print(head(state.df,num+5))
     }
-      
+    
+    
+    if(num=="best"){
+      num<-1
+      print(state.df[num,5])
+    }
+    
+    if(num=="worst"){ 
+      worst.index<-which(state.df[,outcome]>=max(state.df[,outcome],na.rm=T))
+      state.df<-state.df[worst.index,]
+      print(state.df[,5])
+    } 
     
   }
   else {
@@ -46,4 +56,4 @@ rankhospital<-function(state,outcome,num=1){
     }
   }
 }
-rankhospital("MN","heart attack","worst")
+#rankhospital("MN","heart attack",5000)
