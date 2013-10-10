@@ -1,17 +1,22 @@
-#####below to best.R
+#for home:
+#
+directoryBase <- "C:/Documents and Settings/brian/My Documents/My Data Sources/MOOC/coursera computing data science/ProgAssign2/"    
+#for campus:
+#directoryBase <- "I:\\My Data Sources\\coursera\\Computing for Data analysis\\"    
+setwd(directoryBase)
+hospitals<-read.csv(file=paste0(directoryBase,"hospital-data.csv"),header=T)
+outcomes<-read.csv(file=paste0(directoryBase,"outcome-of-care-measures.csv"),colClasses="character")
 
-rankhospital<-function(state,outcome,num=1){
-  #for home:
-  #
-  directoryBase <- "C:/Documents and Settings/brian/My Documents/My Data Sources/MOOC/coursera computing data science/ProgAssign2/"    
-  #for campus:
-  #directoryBase <- "I:\\My Data Sources\\coursera\\Computing for Data analysis\\"    
-  setwd(directoryBase)
-  hospitals<-read.csv(file=paste0(directoryBase,"hospital-data.csv"),header=T)
-  outcomes<-read.csv(file=paste0(directoryBase,"outcome-of-care-measures.csv"),colClasses="character")
+rankall<-function(outcome,num){
   
   outcome.list<- c("heart attack","heart failure","pneumonia")
   state.list<-levels(factor(outcomes$State))
+  Initialize data frame
+  for each state in outcomes make a little database?
+  
+  #validate
+  
+  
   if (state %in% state.list & outcome %in% outcome.list){
     
     state.df<-data.frame(outcomes[outcomes$State==state,c(7,11,17,23,2)])
@@ -23,11 +28,11 @@ rankhospital<-function(state,outcome,num=1){
     state.df[,4]<-suppressWarnings(as.numeric(state.df[,4]))
     state.df<-state.df[order(state.df[,outcome],state.df[,"name"],na.last=T),]
     state.df[,6]<-1:nrow(state.df)
-      
+    
     if (is.integer(num)|is.numeric(num)){
       if(num > nrow(state.df)){return(NA)}
       else{
-      return(as.character(state.df[num,5]))
+        return(as.character(state.df[num,5]))
       }
       #for check    print(head(state.df,num+5))
     }
@@ -54,4 +59,4 @@ rankhospital<-function(state,outcome,num=1){
     }
   }
 }
-rankhospital("WA","heart attack","best")
+#rankall("heart attack",3)
