@@ -2,10 +2,10 @@
 
 rankhospital<-function(state,outcome,num=1){
   #for home:
-  #directoryBase <- "C:/Documents and Settings/brian/My Documents/My Data Sources/MOOC/coursera computing data science/ProgAssign2/"    
-  #for campus:
   #
-  directoryBase <- "I:\\My Data Sources\\coursera\\Computing for Data analysis\\"    
+  directoryBase <- "C:/Documents and Settings/brian/My Documents/My Data Sources/MOOC/coursera computing data science/ProgAssign2/"    
+  #for campus:
+  #directoryBase <- "I:\\My Data Sources\\coursera\\Computing for Data analysis\\"    
   setwd(directoryBase)
   hospitals<-read.csv(file=paste0(directoryBase,"hospital-data.csv"),header=T)
   outcomes<-read.csv(file=paste0(directoryBase,"outcome-of-care-measures.csv"),colClasses="character")
@@ -23,13 +23,11 @@ rankhospital<-function(state,outcome,num=1){
     state.df[,4]<-suppressWarnings(as.numeric(state.df[,4]))
     state.df<-state.df[order(state.df[,outcome],state.df[,"name"],na.last=T),]
     state.df[,6]<-1:nrow(state.df)
-  
-        
-    
+      
     if (is.integer(num)|is.numeric(num)){
-      if(num > nrow(state.df)){print(NA)}
+      if(num > nrow(state.df)){return(NA)}
       else{
-      print(as.character(state.df[num,5]))
+      return(as.character(state.df[num,5]))
       }
       #for check    print(head(state.df,num+5))
     }
@@ -37,13 +35,13 @@ rankhospital<-function(state,outcome,num=1){
     
     if(num=="best"){
       num<-1
-      print(as.character(state.df[num,5]))
+      return(as.character(state.df[num,5]))
     }
     
     if(num=="worst"){ 
       worst.index<-which(state.df[,outcome]>=max(state.df[,outcome],na.rm=T))
       state.df<-state.df[worst.index,]
-      print(as.character(state.df[num,5]))
+      return(as.character(state.df[num,5]))
     } 
     
   }
@@ -56,4 +54,4 @@ rankhospital<-function(state,outcome,num=1){
     }
   }
 }
-#rankhospital("WA","heart attack",7)
+#rankhospital("WA","heart attack",3)
