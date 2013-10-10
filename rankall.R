@@ -26,6 +26,18 @@ rankall<-function(outcome,num){
       } 
     }
   
+  if(num=="best"){
+    num<-1
+    #  return(as.character(state.df[num,5]))
+  }
+  
+  #The following is a problem because it was written as if it came after the "work" code below.  
+  #if(num=="worst"){ 
+   ## worst.index<-which(state.df[,outcome]>=max(state.df[,outcome],na.rm=T))
+    #state.df<-state.df[worst.index,]
+    #return(as.character(state.df[num,5]))
+ # } 
+  
   if (is.integer(num)|is.numeric(num)){print("yay")
     #if(num > nrow(state.df)){return(NA)}
     #else{
@@ -34,11 +46,22 @@ rankall<-function(outcome,num){
     #for check    print(head(state.df,num+5))
   }
   
-  for(state in state.list) {print(state)}
+  
+
+  
+  
+  #pull ranked outcomes and put into data.frame
+  for(state in state.list) {
+    state.df<-data.frame(outcomes[outcomes$State==state,c(7,11,17,23,2)]) #this adds state, attack, failure, pneu, name to dataframe
+    state.df<-cbind(state.df,as.integer(1))
+    colnames(state.df)<-c("state","heart attack","heart failure","pneumonia","name","Rank") 
+    state.df<-state.df[order(state.df[,outcome],state.df[,"name"],na.last=T),]
+    state.df[,6]<-1:nrow(state.df)
     
-  state.df<-data.frame(outcomes[outcomes$State==state,c(7,11,17,23,2)]) #this adds state, attack, failure, pneu, name to dataframe
-  state.df<-cbind(state.df,as.integer(1))
-  colnames(state.df)<-c("state","heart attack","heart failure","pneumonia","name","Rank")  
+    print(head(state.df))
+  }
+    
+  
 }
 #
 rankall("heart attack",5)
@@ -49,25 +72,3 @@ rankall("heart attack",5)
 
 
 
-
-
-
-
-
-#state.df<-state.df[order(state.df[,outcome],state.df[,"name"],na.last=T),]
-#state.df[,6]<-1:nrow(state.df)
-
-
-
-#if(num=="best"){
-#  num<-1
-#  return(as.character(state.df[num,5]))
-#}
-
-#if(num=="worst"){ 
- # worst.index<-which(state.df[,outcome]>=max(state.df[,outcome],na.rm=T))
-  #state.df<-state.df[worst.index,]
-  #return(as.character(state.df[num,5]))
-#} 
-
-#}
