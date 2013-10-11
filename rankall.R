@@ -19,22 +19,10 @@ rankall<-function(outcome,num){
   
   #validate
     
-  if (outcome %in% outcome.list){  }
-  else {
-    if(outcome %in% outcome.list==F){
-      stop("invalid outcome")
-      } 
-    }
-  
-  if(num=="best"){
-    num<-1
-    #  return(as.character(state.df[num,5]))
-  }
-  
-  
-  #pull ranked outcomes and put into data.frame
-  
+  if (!outcome %in% outcome.list){stop("invalid outcome")  }
     
+  #pull ranked outcomes and put into data.frame
+      
   for(state in state.list) {
     state.df<-data.frame(outcomes[outcomes$State==state,c(7,11,17,23,2)]) #this adds 
                 #state, heart attack, ht failure, pneu, name to dataframe
@@ -43,33 +31,41 @@ rankall<-function(outcome,num){
     state.df<-state.df[order(state.df[,outcome],state.df[,"name"],na.last=T),]
     state.df[,6]<-1:nrow(state.df) #this adds the actual ranking
     
-  #for check  print(head(state.df))
-  
-    #Maybe I should create a different data.frame here so that state.df is separate.
+    
+    worst.index<-c()
+    worst.df<-data.frame()
+    
+    if (is.integer(num)|is.numeric(num)){
+      if(num > nrow(state.df)){return(NA)}
+      else{
+        return(as.character(state.df[num,]))
+      }
+      #for check    print(head(state.df,num+5))
+    }
+    if(num=="best"){
+      num<-1
+    }
+    if (is.integer(num)|is.numeric(num)){
+      if(num > nrow(state.df)){return(NA)}
+      else{
+        return(as.character(state.df[num,]))
+      }
+      #for check    print(head(state.df,num+5))
+    }
+    
     if(num=="worst"){ 
        worst.index<-which(state.df[,outcome]>=max(state.df[,outcome],na.rm=T))
-    state.df<-state.df[worst.index,]
-    #print(head((as.character(state.df[num,c(1,5,6)]))))
-     } 
-    print (worst.index)
-    print(state.df[worst.index,])
-    if (is.integer(num)|is.numeric(num)){print("yay")
-                                         #if(num > nrow(state.df)){return(NA)}
-                                         #else{
-                                         # return(as.character(state.df[num,5]))
-                                         #}
-                                         #for check    print(head(state.df,num+5))
+         }
+    #state.df<-state.df[worst.index,]
+   # worst.index<-worst.index
+    print(state)
+    print(worst.index)
+    #print(state.df[worst.index,])  I want to return worst.index and use THAT to create the final table
+    
     }
   }
     
   
-}
+#}
 #
 rankall("heart attack","worst")
-
-
-
-
-
-
-
