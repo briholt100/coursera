@@ -55,14 +55,14 @@ rankall<-function(outcome,num){
     
     if(num=="worst"){ 
        worst.index<-which(state.df[,outcome]>=max(state.df[,outcome],na.rm=T))
-         }
-    #state.df<-state.df[worst.index,]
-   # worst.index<-worst.index
-    print(state)
-    print(worst.index)
-    #print(state.df[worst.index,])  I want to return worst.index and use THAT to create the final table
+       #print(state.df[worst.index,])
+       out.df<-rbind(out.df,state.df[worst.index,c(1,2,5,6)])
+    }
+    
+   
     
     }
+  print(out.df[,c(3:4)])
   }
     
   

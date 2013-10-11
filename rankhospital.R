@@ -54,4 +54,4 @@ rankhospital<-function(state,outcome,num=1){
     }
   }
 }
-rankhospital("WA","heart attack","best")
+rankhospital("AK","heart attack",6)
