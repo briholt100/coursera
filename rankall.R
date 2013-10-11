@@ -31,40 +31,41 @@ rankall<-function(outcome,num){
     #  return(as.character(state.df[num,5]))
   }
   
-  #The following is a problem because it was written as if it came after the "work" code below.  
-  #if(num=="worst"){ 
-   ## worst.index<-which(state.df[,outcome]>=max(state.df[,outcome],na.rm=T))
-    #state.df<-state.df[worst.index,]
-    #return(as.character(state.df[num,5]))
- # } 
-  
-  if (is.integer(num)|is.numeric(num)){print("yay")
-    #if(num > nrow(state.df)){return(NA)}
-    #else{
-     # return(as.character(state.df[num,5]))
-    #}
-    #for check    print(head(state.df,num+5))
-  }
-  
-  
-
-  
   
   #pull ranked outcomes and put into data.frame
+  
+    
   for(state in state.list) {
-    state.df<-data.frame(outcomes[outcomes$State==state,c(7,11,17,23,2)]) #this adds state, attack, failure, pneu, name to dataframe
-    state.df<-cbind(state.df,as.integer(1))
+    state.df<-data.frame(outcomes[outcomes$State==state,c(7,11,17,23,2)]) #this adds 
+                #state, heart attack, ht failure, pneu, name to dataframe
+    state.df<-cbind(state.df,as.integer(1)) #this adds a 6th column for rank
     colnames(state.df)<-c("state","heart attack","heart failure","pneumonia","name","Rank") 
     state.df<-state.df[order(state.df[,outcome],state.df[,"name"],na.last=T),]
-    state.df[,6]<-1:nrow(state.df)
+    state.df[,6]<-1:nrow(state.df) #this adds the actual ranking
     
-    print(head(state.df))
+  #for check  print(head(state.df))
+  
+    #Maybe I should create a different data.frame here so that state.df is separate.
+    if(num=="worst"){ 
+       worst.index<-which(state.df[,outcome]>=max(state.df[,outcome],na.rm=T))
+    state.df<-state.df[worst.index,]
+    #print(head((as.character(state.df[num,c(1,5,6)]))))
+     } 
+    print (worst.index)
+    print(state.df[worst.index,])
+    if (is.integer(num)|is.numeric(num)){print("yay")
+                                         #if(num > nrow(state.df)){return(NA)}
+                                         #else{
+                                         # return(as.character(state.df[num,5]))
+                                         #}
+                                         #for check    print(head(state.df,num+5))
+    }
   }
     
   
 }
 #
-rankall("heart attack",5)
+rankall("heart attack","worst")
 
 
 
