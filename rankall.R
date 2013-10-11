@@ -62,10 +62,10 @@ rankall<-function(outcome,num){
    
     
     }
-  print(out.df[,c(3:4)])
+  print(out.df[,c(3:4,1)])
   }
     
   
 #}
 #
-rankall("heart attack","worst")
+rankall("pneumonia","worst")
