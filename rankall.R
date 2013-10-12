@@ -16,7 +16,6 @@ rankall<-function(outcome,num){
   state.list<-levels(factor(outcomes$State))
   out.df<-data.frame()
   
-  
   #validate
     
   if (!outcome %in% outcome.list){stop("invalid outcome")  }
@@ -35,37 +34,24 @@ rankall<-function(outcome,num){
     worst.index<-c()
     worst.df<-data.frame()
     
-    if (is.integer(num)|is.numeric(num)){
-      if(num > nrow(state.df)){return(NA)}
-      else{
-        return(as.character(state.df[num,]))
-      }
-      #for check    print(head(state.df,num+5))
-    }
     if(num=="best"){
       num<-1
     }
+    
     if (is.integer(num)|is.numeric(num)){
-      if(num > nrow(state.df)){return(NA)}
-      else{
-        return(as.character(state.df[num,]))
-      }
-      #for check    print(head(state.df,num+5))
-    }
-    
-    if(num=="worst"){ 
+        out.df<-rbind(out.df,state.df[num,c(5,1)])
+        colnames(out.df)<-c("hospital",state)}
+
+
+    if(num=="worst")
+{ 
        worst.index<-which(state.df[,outcome]>=max(state.df[,outcome],na.rm=T))
-       #print(state.df[worst.index,])
-       out.df<-rbind(out.df,state.df[worst.index,c(1,2,5,6)])
-    }
-    
-   
+       out.df<-rbind(out.df,state.df[worst.index,c(5,1)])
+        colnames(out.df)<-c("hospital",state)}  
     
     }
-  print(out.df[,c(3:4,1)])
+  print(out.df)
   }
-    
-  
-#}
-#
-rankall("pneumonia","worst")
+
+
+rankall("heart attack",1)
