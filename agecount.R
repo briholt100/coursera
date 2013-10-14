@@ -34,7 +34,15 @@ The function should execute as follows:
 Save your code for this function to a le named
 agecount.R"
 
-
+agecount
+age.list<-c()
+if !cause %in% cause.list{stop function}
+else{
+  parse age of vic
+  store age of vic
+  for (in in list){ age.list<-cbind(age.list,age of vic)}###instead of cbind, append?
+  
+}
 
 
 
