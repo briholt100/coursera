@@ -1,8 +1,8 @@
 #for home:
-#directoryBase <- "C:/Documents and Settings/brian/My Documents/My Data Sources/MOOC/coursera computing data science/ProgAssign2/"    
-#for campus:
 #
-directoryBase <- "I:\\My Data Sources\\coursera\\Computing for Data analysis\\"    
+directoryBase <- "C:/Documents and Settings/brian/My Documents/My Data Sources/MOOC/coursera computing data science/ProgAssign2/"    
+#for campus:
+#directoryBase <- "I:\\My Data Sources\\coursera\\Computing for Data analysis\\"    
 setwd(directoryBase)
 count<-function(cause){
   homicides <- readLines("homicides.txt")
