@@ -1,5 +1,7 @@
 #for home:
-#directoryBase <- "C:/Documents and Settings/brian/My Documents/My Data Sources/MOOC/coursera computing data science/ProgAssign2/"    
+#
+directoryBase <- "C:/Documents and Settings/brian/My Documents/My Data Sources/MOOC/coursera computing data science/ProgAssign2/"    
+setwd(directoryBase)
 #for campus:
 
 agecount<-function(age=NULL){
@@ -9,4 +11,4 @@ agecount<-function(age=NULL){
   return(age.list)  
 }
 
-#agecount()
+agecount(66)
